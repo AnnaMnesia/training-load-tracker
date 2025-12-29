@@ -1,10 +1,10 @@
-export type SessionType = "run" | "strength" | "swim" | "rest";
+export type SessionType = "run" | "strength" | "swim";
 
 export interface TrainingSession {
   id: string;
-  date: string; // ISO date string (local date)
+  date: string; // ISO date string: YYYY-MM-DD
   type: SessionType;
-  durationMinutes: number; // integer > 0
+  durationMinutes: number; // > 0
   intensity: number; // 1–5
   load: number; // derived: durationMinutes * intensity
 }

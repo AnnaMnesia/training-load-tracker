@@ -1,7 +1,7 @@
 import { typography } from "./styles/typography";
 import { colors } from "./styles/colors";
 
-type Status = "green" | "orange" | "red" | "nutural";
+type Status = "green" | "orange" | "red";
 
 const GUIDANCE_COPY: Record<Status, string[]> = {
   green: [
@@ -15,10 +15,6 @@ const GUIDANCE_COPY: Record<Status, string[]> = {
   red: [
     "Your load is high and recovery may be compromised.",
     "Consider rest or low-intensity training.",
-  ],
-  nutural: [
-    "It's important to allow your body to recover.",
-    "Engage in light activities or take a complete rest day.",
   ],
 };
 

@@ -2,7 +2,7 @@ import { colors } from "./styles/colors";
 import { spacing } from "./styles/spacing";
 import { radius } from "./styles/radius";
 
-type Status = "green" | "orange" | "red" | "nutural";
+type Status = "green" | "orange" | "red";
 
 type StatusBadgeProps = {
   status: Status;
@@ -15,7 +15,6 @@ const STATUS_LABEL: Record<Status, string> = {
   green: "Optimal",
   orange: "Moderate",
   red: "High",
-  nutural: "Rest",
 };
 
 const STATUS_STYLES: Record<Status, { text: string; background: string }> = {
@@ -30,10 +29,6 @@ const STATUS_STYLES: Record<Status, { text: string; background: string }> = {
   red: {
     text: colors.light.textPrimary,
     background: colors.light.danger,
-  },
-  nutural: {
-    text: colors.light.textPrimary,
-    background: colors.light.primaryBackground,
   },
 };
 

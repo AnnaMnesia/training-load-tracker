@@ -1,4 +1,6 @@
 export const calculateLoad = (
   durationMinutes: number,
   intensity: number
-): number => durationMinutes * intensity;
+): number => {
+  return durationMinutes * intensity;
+};

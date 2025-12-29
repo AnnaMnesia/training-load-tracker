@@ -1,14 +1,4 @@
-// useSessions is:
-// A custom hook
-// That owns the sessions array
-// Reads it once from localStorage
-// Writes it back whenever it changes
-
-// 1️⃣ Why a custom hook?
-// Because:
-// Multiple components will need sessions
-// We want one source of truth
-// Logic ≠ UI
+// src/features/sessions/hooks/useSessions.ts
 
 import { useEffect, useState } from "react";
 import type { SessionType, TrainingSession } from "../../../types/session";
@@ -36,31 +26,34 @@ export const useSessions = () => {
     }
   });
 
-  // What this means:
-  // React renders first
-  // Then runs the effect
-  // Effect runs only when sessions change
+  // Persist to localStorage whenever sessions change
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(sessions));
   }, [sessions]);
 
-  const addSession = (input: AddSessionInput) => {
-    if (input.durationMinutes <= 0) return;
-    if (input.intensity < 1 || input.intensity > 5) return;
+  const addSession = ({
+    date,
+    type,
+    durationMinutes,
+    intensity,
+  }: AddSessionInput) => {
+    if (durationMinutes <= 0) return;
+    if (intensity < 1 || intensity > 5) return;
 
     const newSession: TrainingSession = {
       id: crypto.randomUUID(),
-      date: input.date,
-      type: input.type,
-      durationMinutes: input.durationMinutes,
-      intensity: input.intensity,
-      load: calculateLoad(input.durationMinutes, input.intensity),
+      date,
+      type,
+      durationMinutes,
+      intensity,
+      load: calculateLoad(durationMinutes, intensity),
     };
+
     setSessions((prev) => [...prev, newSession]);
   };
 
   const deleteSession = (id: string) => {
-    setSessions((prev) => prev.filter((session) => session.id !== id));
+    setSessions((prev) => prev.filter((s) => s.id !== id));
   };
 
   const updateSession = (
@@ -70,6 +63,7 @@ export const useSessions = () => {
     setSessions((prev) =>
       prev.map((session) => {
         if (session.id !== id) return session;
+
         if (
           update.durationMinutes !== undefined &&
           update.durationMinutes <= 0
@@ -84,21 +78,20 @@ export const useSessions = () => {
           return session;
         }
 
-        const updatedSession = {
-          ...session,
-          ...update,
-        };
+        const updated = { ...session, ...update };
 
         return {
-          ...updatedSession,
-          load: calculateLoad(
-            updatedSession.durationMinutes,
-            updatedSession.intensity
-          ),
+          ...updated,
+          load: calculateLoad(updated.durationMinutes, updated.intensity),
         };
       })
     );
   };
 
-  return { sessions, addSession, deleteSession, updateSession };
+  return {
+    sessions,
+    addSession,
+    deleteSession,
+    updateSession,
+  };
 };
