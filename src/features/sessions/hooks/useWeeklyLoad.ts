@@ -4,11 +4,11 @@
 import { useMemo } from "react";
 import type { TrainingSession } from "../../../types/session";
 
-type WeeklyStatus = "green" | "yellow" | "red";
+type WeeklyStatus = "green" | "orange" | "red";
 
 // Recovery Thresholds
-const GREE_THRESHOLD = 300;
-const YELLOW_THRESHOLD = 600;
+const GREEN_THRESHOLD = 300;
+const ORANGE_THRESHOLD = 600;
 
 export const useWeeklyLoad = (
   sessions: TrainingSession[],
@@ -20,20 +20,21 @@ export const useWeeklyLoad = (
     oneWeekAgo.setDate(now.getDate() - 7);
 
     // Filter sessions to keep only sessions from the last 7 days
-    const resentSessions = sessions.filter((session) => {
+    const recentSessions = sessions.filter((session) => {
       const sessionDate = new Date(session.date);
       return sessionDate >= oneWeekAgo;
     });
 
     // Add up their load
-    return resentSessions.reduce((sum, session) => sum + session.load, 0);
+    return recentSessions.reduce((sum, session) => sum + session.load, 0);
   }, [sessions, now]);
 
   // Determine the recovery status based on weekly load
   const status: WeeklyStatus = useMemo(() => {
-    if (weeklyLoad < GREE_THRESHOLD) return "green";
-    if (weeklyLoad < YELLOW_THRESHOLD) return "yellow";
+    if (weeklyLoad < GREEN_THRESHOLD) return "green";
+    if (weeklyLoad < ORANGE_THRESHOLD) return "orange";
     return "red";
   }, [weeklyLoad]);
+
   return { weeklyLoad, status };
 };

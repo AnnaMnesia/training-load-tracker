@@ -6,13 +6,13 @@ type CardProps = {
   padding?: keyof typeof spacing;
 };
 
-export const Card = ({ children, padding = "md" }: CardProps) => {
+export const Card = ({ children, padding = "xl" }: CardProps) => {
   return (
     <div
       style={{
         backgroundColor: colors.light.surface,
         padding: spacing[padding],
-        borderRadius: radius.lg,
+        borderRadius: radius.xl,
         boxShadow: shadows.md,
       }}
     >

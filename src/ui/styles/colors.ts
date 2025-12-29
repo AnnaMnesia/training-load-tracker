@@ -1,16 +1,22 @@
 export const colors = {
   light: {
-    background: "#F5F5F7", //  light gray
+    background: "#F5F5F7",
     surface: "#FFFFFF",
     border: "#D2D2D7",
 
     textPrimary: "#1D1D1F",
-    textSecondary: "#515154",
+    textSecondary: "#6E6E73",
     textMuted: "#86868B",
+    textButton: "#FFFFFF",
 
-    success: "#2E7D32", // calm green
-    warning: "#B26A00", // muted amber
-    danger: "#C62828", // restrained red
+    primary: "#0071E3",
+    primaryHover: "#0077ED",
+    primaryActive: "#0068D1",
+    primaryBackground: "#E8F0FE",
+
+    success: "#AAFF00",
+    warning: "#ff8d28ff",
+    danger: "#B3261E",
   },
 
   dark: {
@@ -21,9 +27,15 @@ export const colors = {
     textPrimary: "#F5F5F7",
     textSecondary: "#D1D1D6",
     textMuted: "#8E8E93",
+    textButton: "#FFFFFF",
 
-    success: "#66BB6A",
-    warning: "#FFB74D",
-    danger: "#EF5350",
+    primary: "#0A84FF",
+    primaryHover: "#409CFF",
+    primaryActive: "#007AFF",
+    primaryBackground: "#1C2A3A",
+
+    success: "#AAFF00",
+    warning: "#ff8d28ff",
+    danger: "#B3261E",
   },
 } as const;

@@ -1,4 +1,4 @@
-export type SessionType = "run" | "strength" | "swim";
+export type SessionType = "run" | "strength" | "swim" | "rest";
 
 export interface TrainingSession {
   id: string;
