@@ -27,7 +27,7 @@ export const typography = {
   body: {
     fontSize: 17,
     fontWeight: 400,
-    emphasizedWeight: 600,
+    emphasizedWeight: 500,
   },
 
   // Metadata

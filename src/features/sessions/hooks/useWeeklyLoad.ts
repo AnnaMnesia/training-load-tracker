@@ -7,8 +7,8 @@ import type { TrainingSession } from "../../../types/session";
 type WeeklyStatus = "green" | "orange" | "red";
 
 // Recovery Thresholds
-const GREEN_THRESHOLD = 300;
-const ORANGE_THRESHOLD = 600;
+const GREEN_THRESHOLD = 600;
+const ORANGE_THRESHOLD = 1000;
 
 export const useWeeklyLoad = (
   sessions: TrainingSession[],

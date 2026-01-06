@@ -1,41 +1,68 @@
-import { Stack } from "../../../ui/layout/Stack";
 import { Card } from "../../../ui/surfaces/Card";
 import { useWeeklyLoad } from "../../sessions/hooks/useWeeklyLoad";
-import { useSessions } from "../hooks/useSessions";
 import { typography } from "../../../ui/styles/typography";
 import { StatusBadge } from "../../../ui/StatusBadge";
 import { Divider } from "../../../ui/layout/Divider";
 import { StatusGuidance } from "../../../ui/StatusGuidance";
+import type { TrainingSession } from "../../../types/session";
 
-export const WeeklyLoadCard = () => {
-  const { sessions } = useSessions();
+type WeeklyLoadCardProps = {
+  sessions: TrainingSession[];
+};
+
+export const WeeklyLoadCard = ({ sessions }: WeeklyLoadCardProps) => {
   const { weeklyLoad, status } = useWeeklyLoad(sessions);
   return (
     <Card>
-      <Stack gap="md">
-        <span
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          height: "100%",
+        }}
+      >
+        <div>
+          <span
+            style={{
+              ...typography.title,
+            }}
+          >
+            Weekly Load
+          </span>
+        </div>
+        <Divider />
+        <div
           style={{
-            ...typography.title,
+            display: "flex",
+            flex: 3,
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 8,
           }}
         >
-          Weekly Load
-        </span>
-        <Divider />
-        <Stack gap="sm" align="center">
           <span style={{ ...typography.largeTitle }}>{weeklyLoad}</span>
           <StatusBadge
             status={status}
+            variant="weekly"
             style={{
               fontSize: typography.body.fontSize,
             }}
           >
             Load
           </StatusBadge>
-        </Stack>
+        </div>
         <Divider />
-
-        <StatusGuidance status={status} />
-      </Stack>
+        <div
+          style={{
+            flex: 1,
+            alignContent: "center",
+            justifyContent: "center",
+          }}
+        >
+          <StatusGuidance status={status} />
+        </div>
+      </div>
     </Card>
   );
 };

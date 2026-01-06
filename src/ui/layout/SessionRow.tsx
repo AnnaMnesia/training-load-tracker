@@ -28,12 +28,12 @@ const formatDay = (date: string) =>
 export const SessionRow = ({ type, date, load, status }: SessionRowProps) => {
   return (
     <Inline gap="md" align="center">
-      <span style={{ ...typography.headline }}>{TYPE_EMOJI[type]}</span>
+      <span style={{ ...typography.title }}>{TYPE_EMOJI[type]}</span>
       <Stack gap="xs">
         <span
           style={{
-            ...typography.headline,
-            fontWeight: typography.headline.emphasizedWeight,
+            ...typography.body,
+            fontWeight: typography.body.emphasizedWeight,
           }}
         >
           {capitalize(type)}
@@ -43,20 +43,39 @@ export const SessionRow = ({ type, date, load, status }: SessionRowProps) => {
         </span>
       </Stack>
 
-      <Inline gap="xs">
-        <StatusBadge status={status}></StatusBadge>
-        <Inline gap="xs">
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-end",
+          gap: 12,
+          flexGrow: 1,
+        }}
+      >
+        <StatusBadge
+          status={status}
+          variant="session"
+        ></StatusBadge>
+        <div>
           <span
             style={{
-              ...typography.headline,
-              fontWeight: typography.headline.emphasizedWeight,
+              ...typography.body,
+              fontWeight: typography.body.emphasizedWeight,
             }}
           >
             {load}
           </span>
-          <span>Load</span>
-        </Inline>
-      </Inline>
+          <span
+            style={{
+              ...typography.body,
+              color: colors.light.textSecondary,
+              marginLeft: 2,
+            }}
+          >
+            Load
+          </span>
+        </div>
+      </div>
     </Inline>
   );
 };
